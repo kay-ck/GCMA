@@ -45,7 +45,7 @@ def main(args):
     device = torch.device("cuda", args.local_rank)
 
     netG = custom_gan(args).to(device)
-    netG.load_state_dict(torch.load("netG_{}_gcma.pth".format(args.model_type), map_location="cpu"))
+    netG.load_state_dict(torch.load("checkpoints/netG_{}_gcma.pth".format(args.model_type), map_location="cpu"))
     netG = DistributedDataParallel(netG, device_ids=[args.local_rank], output_device=args.local_rank)
     netG.eval()
 
